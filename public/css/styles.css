@@ -1,0 +1,121 @@
+body{
+    overflow-y: auto;
+}
+.gugi{
+    font-family: 'Gugi', cursive;
+}
+
+.kufam{
+    font-family: 'Kufam';
+}
+.notes{
+    color: blueviolet;
+}
+.pointer{
+    cursor: pointer;
+}
+.ahover:hover{
+    color: white;
+    background-color: rgb(45, 105, 161);
+}
+.active-mtg{
+    color: white;
+    background-color: black;
+}
+.scroller{
+    overflow-y: scroll;
+    max-height: 38em;
+}
+.card-hover{
+    padding: 0.5em;
+    cursor: pointer;
+}
+.card-hover:hover{
+    color: #000;
+    background-color: rgb(235, 235, 235);
+    box-shadow: 5px 5px 5px rgb(100, 100, 100);
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+}
+.scroller-card{
+    overflow-y: scroll;
+}
+.card-text{
+    font-size: 12px;
+}
+.minor{
+    font-size: 13px;
+}
+.television{
+    margin: 0%;
+    padding: 30%;
+    border: solid #000;
+}
+.highlight{
+    text-shadow: 1px 1px 3px  rgb(11, 248, 3);;
+}
+
+.bordered{
+
+    border: solid;
+}
+
+.battlefield{
+    overflow-y: hidden;
+   max-height: 25vmax;
+    height: 25vmax;      
+}
+
+.table{
+   
+    margin: 3px;
+}
+.player{
+    
+    height: 21rem;
+    margin: 7px;    
+}
+
+.scroller-hand{   
+
+    overflow-x: scroll;
+}
+
+.p-padding{
+    
+    
+    padding: 42px;
+    
+}
+
+.soft-border{
+    border: solid rgb( 200, 200, 200 );
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+}
+.link-light{
+    color: #000;
+    text-shadow: 3px 3px 3px rgb(100, 100, 100);
+}
+
+.link-light:hover{
+    text-decoration: none;
+    color: white !important;
+}
+
+.min-hand{
+
+    min-height: 300px;
+}
+
+.scroller-card{
+
+    max-height: 145px;
+    overflow-y: scroll;
+}
