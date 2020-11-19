@@ -14,6 +14,7 @@
 
     @if( Request::is( 'create_deck' ) )
     <script src="{{ asset( 'js/vuex.js' ) }}" type="text/javascript"></script>
+    <script src="{{ asset( 'js/search_card.js' ) }}" type="text/javascript"></script>
     @endif
 
     @if( Request::is( 'save_deck' ) )
