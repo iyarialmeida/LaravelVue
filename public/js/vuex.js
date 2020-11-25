@@ -1,8 +1,9 @@
 $( document ).ready( function(){
 
-  let base_uri = 'https://api.scryfall.com';  
-  
-  let vm = new Vue({ 
+  var base_uri = 'https://api.scryfall.com';  
+
+   
+  var vm = new Vue({ 
         el:'#mtg-vue',
         data:{
             setQuery:'',
@@ -45,21 +46,21 @@ $( document ).ready( function(){
 
             addToOneList( name, uri, deck_obj.deckList, 'Main Deck' );
             
-            $( '#expandible' ).attr( 'class', 'collapse show' );
+           
 
             },
           addToSide:function( name, uri ){
 
             addToOneList( name, uri, deck_obj.sideList, 'Side Deck' );            
 
-            $( '#expandible' ).attr( 'class', 'collapse show' );
+           
 
             },
           addToLands:function( name, uri ){
               
             addToOneList( name, uri, deck_obj.landList, 'Lands' );
 
-            $( '#expandible' ).attr( 'class', 'collapse show' );
+           
            
             },
           
@@ -79,7 +80,8 @@ $( document ).ready( function(){
         },
          
          
-    })
+    });
+    
 //-------------------------------------------------
 let deck_obj = new Vue({
   el:'#deck',
@@ -141,6 +143,37 @@ let deck_obj = new Vue({
   },
   
 });
+
+
+let search = new Vue({
+  el:'#search-div',
+  data:{
+      query3:'',
+      query_result:[],
+      selected:'',
+      result_card:{}
+  },
+  methods:{         
+      searchByString:function(title){
+        vm.one_card = {
+          name:'Loading...',
+          mana_cost:'Loading...',
+          type_line:'Loading...',
+          oracle_text:'Loading...',
+          image_uris:
+           { 
+             normal:'img/icon/loading.gif'
+            }
+          
+        };
+        autoComplete(title,'/cards/named');
+      }
+  }
+});
+
+search.$watch('query3', function (val) {
+autoComplete(this.query3,'/cards/autocomplete');
+})
 
 //--------------------------------------------------
 
@@ -286,7 +319,30 @@ function addToOneList( name, uri, theList, listType ){
       
     }
     
-    /*alert( name + ': added to < ' + listType + ' >');*/
+    $( '#expandible' ).attr( 'class', 'collapse show' );
+
+}
+
+function autoComplete(text,url){
+  if(text){
+      let params = url=='/cards/autocomplete' ? {q:text} : {fuzzy:text};
+     
+      axios.get(base_uri + url, {
+          params: params
+      })
+      .then(function (response) {
+          
+          if(url=='/cards/autocomplete'){
+              search.query_result = response.data.data;
+          }else{
+              //search.result_card =response.data;
+              console.log(response.data);
+              vm.one_card =response.data;
+          }
+          
+      });
+  }
+  
 
 }
 
