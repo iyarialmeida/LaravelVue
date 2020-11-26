@@ -20,6 +20,18 @@
               </select> &nbsp;&nbsp;
               <span> <a href="#" class="btn btn-light active d-inline" v-on="click:searchByString(selected)"> Yes! </a></span>
             </div>
+          </div><hr>
+          <div class="row">
+            <div class="col">
+              <div class="input-group mb-2">               
+                <select class="form-control form-control-sm" v-model="selected_color">
+                  <option>Select a Color</option>
+                  <option value="red">
+                    Red
+                  </option>
+                </select>
+              </div>
+            </div><button v-on="click:colorSearch()">MyButton</button>
           </div>
         </div>
         <div class="modal-footer">

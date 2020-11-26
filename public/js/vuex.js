@@ -151,7 +151,8 @@ let search = new Vue({
       query3:'',
       query_result:[],
       selected:'',
-      result_card:{}
+      result_card:{},
+      selected_color:''
   },
   methods:{         
       searchByString:function(title){
@@ -167,6 +168,9 @@ let search = new Vue({
           
         };
         autoComplete(title,'/cards/named');
+      },
+      colorSearch:function(){
+        searchByColor(this.selected_color);
       }
   }
 });
@@ -322,7 +326,7 @@ function addToOneList( name, uri, theList, listType ){
     $( '#expandible' ).attr( 'class', 'collapse show' );
 
 }
-
+//----------------------------------------------------------------------------------
 function autoComplete(text,url){
   if(text){
       let params = url=='/cards/autocomplete' ? {q:text} : {fuzzy:text};
@@ -335,8 +339,7 @@ function autoComplete(text,url){
           if(url=='/cards/autocomplete'){
               search.query_result = response.data.data;
           }else{
-              //search.result_card =response.data;
-              console.log(response.data);
+             
               vm.one_card =response.data;
           }
           
@@ -345,6 +348,15 @@ function autoComplete(text,url){
   
 
 }
-
+//------------------------------------------------------------------------------------
+function searchByColor(param){ 
+  console.log( encodeURIComponent('c:green'));
+  axios.get(base_uri +'/cards/search?q='+encodeURIComponent('c:'+param))
+.then(function (response) {
+ 
+   console.log(response.data);
+    
+});
+ }
 
 });
