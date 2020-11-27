@@ -50,9 +50,9 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ route( 'deck_manager') }}">Manage Decks</a>
             </li>
-            <li class="nav-item">
+           {{-- <li class="nav-item">
               <a class="nav-link" href="{{ url( 'test_deck' ) }}">Test Deck</a>
-            </li>
+            </li>--}}
             <li class="nav-item">
               <a class="nav-link" href="#">Store</a>
             </li>

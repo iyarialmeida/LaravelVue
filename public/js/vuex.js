@@ -152,7 +152,10 @@ let search = new Vue({
       query_result:[],
       selected:'',
       result_card:{},
-      selected_color:''
+      selected_color:'',
+      selected_card_type:'',
+      selected_catalog:'',
+      catalog:[]
   },
   methods:{         
       searchByString:function(title){
@@ -176,8 +179,14 @@ let search = new Vue({
 });
 
 search.$watch('query3', function (val) {
-autoComplete(this.query3,'/cards/autocomplete');
+  search.selected='';
+autoComplete(val,'/cards/autocomplete');
 })
+
+search.$watch('selected_card_type', function (val) {
+  search.selected_catalog='';
+  getCatalog(val);
+  })
 
 //--------------------------------------------------
 
@@ -328,8 +337,7 @@ function addToOneList( name, uri, theList, listType ){
 }
 //----------------------------------------------------------------------------------
 function autoComplete(text,url){
-  if(text){
-      let params = url=='/cards/autocomplete' ? {q:text} : {fuzzy:text};
+  if(!text){search.query_result = [];return;}      let params = url=='/cards/autocomplete' ? {q:text} : {fuzzy:text};
      
       axios.get(base_uri + url, {
           params: params
@@ -344,19 +352,28 @@ function autoComplete(text,url){
           }
           
       });
-  }
+ 
   
 
 }
 //------------------------------------------------------------------------------------
 function searchByColor(param){ 
-  console.log( encodeURIComponent('c:green'));
-  axios.get(base_uri +'/cards/search?q='+encodeURIComponent('c:'+param))
-.then(function (response) {
- 
-   console.log(response.data);
-    
-});
+    console.log( encodeURIComponent('c:green'));
+    axios.get(base_uri +'/cards/search?q='+encodeURIComponent('c:'+param))
+  .then(function (response) {
+  
+    console.log(response.data);
+      
+  });
  }
-
+//------------------------------------------
+function getCatalog(catalog){
+  if(!catalog){search.catalog=[];return;}
+  axios.get(base_uri +'/catalog/'+catalog+'-types')
+  .then(function (response) {  
+    search.catalog=response.data.data;      
+  });
+ 
+}
+//------------------------------------------------------------------------
 });
