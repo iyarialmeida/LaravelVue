@@ -77,12 +77,15 @@
                     </div>
                   </div>
             </div>
-            <div class=" @{{ expanded ? 'btn-group dropup' : 'none'}}">
-              <a class="dropdown-toggle btn btn-light active" data-toggle="collapse" href="#expandible" role="button" aria-expanded="true" aria-controls="collapseExample"
-              v-on="click: expansorToggle()">
-                Selected Cards  
-            </a> 
-            </div>
+
+            <div class="row justify-content-center">  
+              <div class=" @{{ expanded ? 'btn-group dropup' : 'none'}}">
+                <a class="dropdown-toggle btn btn-light active" data-toggle="collapse" href="#expandible" role="button" aria-expanded="true" aria-controls="collapseExample"
+                v-on="click: expansorToggle()">
+                  Selected Cards  
+              </a> 
+              </div>            
+            </div>          
             
         </div>
     </div>
@@ -103,7 +106,7 @@
             </div>
         </div>
         <div class="col-lg-5">
-            <h4 class="d-inline p-2">Card List</h4>  <a class="nav-link d-inline p-2" href="" data-toggle="modal" data-target="#search-modal">Advanced Search</a>
+            <h4 class="d-inline p-2">Card List</h4> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a class="nav-link d-inline p-2" href="" data-toggle="modal" data-target="#search-modal">Advanced Search</a>
             <div class="container-fluid">
               <input class="form-control form-control-sm shadow p-3 mb-5 bg-white rounded" type="text" placeholder="Filter Card-List" v-model="cardQuery">
               <div class="list-group shadow p-3 mb-5 bg-white rounded scroller" role="tablist">              
@@ -151,6 +154,29 @@
               </div>
             </div>
         </div>
+    </div>
+    <div class="row justify-content-center" id="pager">
+      <div class="col col-lg-2">
+        <nav aria-label="Page navigation example" v-show="vshow" ref="myPager">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="@{{next}}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
 </div>
 

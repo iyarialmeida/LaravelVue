@@ -159,21 +159,18 @@ let search = new Vue({
   },
   methods:{         
       searchByString:function(title){
-        vm.one_card = {
-          name:'Loading...',
-          mana_cost:'Loading...',
-          type_line:'Loading...',
-          oracle_text:'Loading...',
-          image_uris:
-           { 
-             normal:'img/icon/loading.gif'
-            }
-          
-        };
+        setOneCard()
         autoComplete(title,'/cards/named');
       },
-      colorSearch:function(){
-        searchByColor(this.selected_color);
+      applySearch:function(){
+        vm.cards_list =[{
+          name:'Loading',
+          image_uris:{
+            small:'img/icon/loading.gif'
+          },
+        }];
+        setOneCard()
+        searchByParams();
       }
   }
 });
@@ -189,7 +186,22 @@ search.$watch('selected_card_type', function (val) {
   })
 
 //--------------------------------------------------
+/*-******************************************************************/
 
+
+let pager = new Vue({
+  el:"#pager",
+  data:{
+    pages:[],
+    next:'',
+    prev:'',
+    vshow:false
+  }
+});
+
+
+/*************************************************************************************** */
+/********************************* */
 
 function getSets(){
 
@@ -347,23 +359,63 @@ function autoComplete(text,url){
           if(url=='/cards/autocomplete'){
               search.query_result = response.data.data;
           }else{
-             
+            vm.cards_list = [];
               vm.one_card =response.data;
           }
           
-      });
- 
-  
+      });  
 
 }
 //------------------------------------------------------------------------------------
-function searchByColor(param){ 
-    console.log( encodeURIComponent('c:green'));
-    axios.get(base_uri +'/cards/search?q='+encodeURIComponent('c:'+param))
+function searchByParams(){ 
+  /*console.log(search.selected_card_type);
+   
+   */
+    let type = search.selected_card_type ? 't:'+search.selected_card_type :'';
+    let catalog = search.selected_catalog ? 't:'+search.selected_catalog :'';
+    let color = search.selected_color ? 'c:'+search.selected_color :'';
+
+    let uriComp = '';
+
+    if(type){
+      uriComp+=encodeURIComponent(type);
+      if(catalog){
+        uriComp+='+'+encodeURIComponent(catalog);
+        if(color){
+          uriComp+='+'+encodeURIComponent(color);
+        }
+      }
+      if(color){
+        uriComp+='+'+encodeURIComponent(color);
+      }
+    }   
+    
+    axios.get(base_uri +'/cards/search?q='+uriComp)
   .then(function (response) {
-  
-    console.log(response.data);
+    
+    if(response.data.total_cards>1){
       
+      vm.cards_list = response.data.data;
+      setOneCard()
+    }
+    if(response.data.total_cards==1){     
+     
+      vm.one_card = response.data.data[0];
+      vm.cards_list = [];
+    }
+
+    if( response.data.has_more ){
+      console.log(response.data.next_page );
+      pager.vshow = true;
+      pager.next = response.data.next_page;
+      console.log(pager.next );
+      pager.prev = base_uri +'/cards/search?q='+uriComp;
+
+    }
+    
+      
+  }).catch(function (error) {
+    alert('No results were obtained, try another combination');
   });
  }
 //------------------------------------------
@@ -376,4 +428,19 @@ function getCatalog(catalog){
  
 }
 //------------------------------------------------------------------------
+
+function setOneCard(){
+  vm.one_card = {
+    name:'Loading...',
+    mana_cost:'Loading...',
+    type_line:'Loading...',
+    oracle_text:'Loading...',
+    image_uris:
+     { 
+       normal:'img/icon/loading.gif'
+      }
+    
+  };
+}
+//-------------------------------------------------------------------------------------
 });

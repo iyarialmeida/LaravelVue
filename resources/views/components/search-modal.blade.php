@@ -1,13 +1,13 @@
 <div class="modal fade" id="search-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-      <div class="modal-content">
+      <div class="modal-content" id="search-div">
         <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Advanced Search </h5> &nbsp;&nbsp; <img src="{{ asset('img/icon/eye.gif') }}" height="30px;" width="30px;">
+        <h5 class="modal-title" id="exampleModalLabel">Advanced Search </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body" id="search-div">
+        <div class="modal-body">
           <div class="row">
             <div class="col">             
               <div class="input-group mb-2">               
@@ -42,7 +42,7 @@
                 </select>
               </div>
             </div>
-            <div class="col" v-show="selected_card_type != 'artifact' && selected_card_type != 'land' && selected_card_type != ''">
+            <div class="col" v-show="selected_card_type != 'artifact' && selected_card_type != 'land' && selected_card_type != '' && selected_card_type != 'planeswalker'">
               <div class="input-group mb-2">               
                 <select class="form-control form-control-sm" v-model="selected_color">
                   <option value="">Select a Color</option>
@@ -56,11 +56,12 @@
             </div>
             
           </div>
-          <button class="btn btn-dark" v-on="click:colorSearch()">MyButton</button>
+         
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+         
+          <button type="button" class="btn btn-dark" v-on="click:applySearch()" >Apply Search!</button>
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
