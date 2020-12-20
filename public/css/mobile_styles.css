@@ -1,0 +1,21 @@
+body {
+    height: 100%;
+}
+.gugi{
+    font-family: 'Gugi', cursive;
+}
+
+.kufam{
+    font-family: 'Kufam';
+}
+.main_logo_container{
+    height: 100%;
+    margin-top: 50%;
+}
+.white{
+    color: white;
+}
+
+.data-slider-b{
+    background-color: black;
+}
