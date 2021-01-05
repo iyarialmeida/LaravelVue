@@ -120,3 +120,15 @@ body{
     max-height: 145px;
     overflow-y: scroll;
 }
+
+.x-slider{
+    overflow-x: scroll;
+}
+
+.nomax{
+    
+    max-height:calc(100%);
+    overflow-y: hidden;
+   
+    
+}

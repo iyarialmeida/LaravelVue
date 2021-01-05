@@ -1,79 +1,142 @@
 @extends('layouts.main')
 @section( 'content' )
+
 <div class="container-fluid">
-  <div class="row justify-content-md-center flex-center">
-    <div class="col">  
-      <div class="television">
-        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-          </ol>          
-            <div class="carousel-inner">          
-              <div class="carousel-item  active">
-                <img src="{{ asset( 'img/wallpapper/01.jpg') }}" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>Second slide label</h5>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img src="{{ asset( 'img/wallpapper/02.jpg') }}" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>Third slide label</h5>
-                  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                </div>
-              </div>         
+  <div class="row x-slider nomax">
+    <div class="col"><br>
+      <h3 class="gugi">Rated Over 100!</h3>
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <div class="card-body">
+              <h5 class="kufam">Deck Name</h5>
+              <small class="gugi">Author Name</small>
+              <p class="kufam">Description</p>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>  
-        </div>          
-    </div>
-    <div class="col">
-      <div class="television">
-        <div id="seconCarousl" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#seconCarousl" data-slide-to="0" class="active"></li>
-            <li data-target="#seconCarousl" data-slide-to="1"></li>
-            <li data-target="#seconCarousl" data-slide-to="2"></li>
-            </ol>
-          
-            <div class="carousel-inner">          
-              <div class="carousel-item  active">
-                <img src="{{ asset( 'img/wallpapper/01.jpg') }}" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>Second slide label</h5>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img src="{{ asset( 'img/wallpapper/02.jpg') }}" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                  <h5>Third slide label</h5>
-                  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                </div>
-              </div>         
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <div class="card-body">
+              <h5 class="kufam">Deck Name</h5>
+              <small class="gugi">Author Name</small>
+              <p class="kufam">Description</p>
             </div>
-            <a class="carousel-control-prev" href="#seconCarousl" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#seconCarousl" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>  
-        </div> 
+          </div>
+        </li>  <li class="list-group-item">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <div class="card-body">
+              <h5 class="kufam">Deck Name</h5>
+              <small class="gugi">Author Name</small>
+              <p class="kufam">Description</p>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
+
+  <div class="row x-slider nomax">
+    <div class="col"><br>
+      <h3 class="gugi">Rated 70-100</h3>
+      <ul class="list-group list-group-horizontal">
+        <li class="list-group-item">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <div class="card-body">
+              <h5 class="kufam">Deck Name</h5>
+              <small class="gugi">Author Name</small>
+              <p class="kufam">Description</p>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <div class="card-body">
+              <h5 class="kufam">Deck Name</h5>
+              <small class="gugi">Author Name</small>
+              <p class="kufam">Description</p>
+            </div>
+          </div>
+        </li>  
+        <li class="list-group-item">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <div class="card-body">
+              <h5 class="kufam">Deck Name</h5>
+              <small class="gugi">Author Name</small>
+              <p class="kufam">Description</p>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <div class="card-body">
+              <h5 class="kufam">Deck Name</h5>
+              <small class="gugi">Author Name</small>
+              <p class="kufam">Description</p>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <div class="card-body">
+              <h5 class="kufam">Deck Name</h5>
+              <small class="gugi">Author Name</small>
+              <p class="kufam">Description</p>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <div class="card-body">
+              <h5 class="kufam">Deck Name</h5>
+              <small class="gugi">Author Name</small>
+              <p class="kufam">Description</p>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <div class="card-body">
+              <h5 class="kufam">Deck Name</h5>
+              <small class="gugi">Author Name</small>
+              <p class="kufam">Description</p>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <div class="card-body">
+              <h5 class="kufam">Deck Name</h5>
+              <small class="gugi">Author Name</small>
+              <p class="kufam">Description</p>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="card" style="width: 18rem;">
+            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <div class="card-body">
+              <h5 class="kufam">Deck Name</h5>
+              <small class="gugi">Author Name</small>
+              <p class="kufam">Description</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
 </div>
 
 
