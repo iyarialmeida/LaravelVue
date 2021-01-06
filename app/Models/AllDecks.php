@@ -17,6 +17,7 @@ class AllDecks extends Model
         'author',
         'public',
         'comments',
-        'rate'
+        'rate',
+        'img_url'
     ];
 }

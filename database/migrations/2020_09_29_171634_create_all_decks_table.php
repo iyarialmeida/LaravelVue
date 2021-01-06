@@ -21,6 +21,7 @@ class CreateAllDecksTable extends Migration
             $table->boolean( 'public' )->default( false );
             $table->boolean( 'comments' )->default( false ); 
             $table->bigInteger( 'rate' )->default( 0 );
+            $table->string( 'img_url' )->default( 'img/mtg/card.jpg' );
             $table->timestamps();
         });
     }

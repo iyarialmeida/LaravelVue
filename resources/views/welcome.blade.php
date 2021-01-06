@@ -96,7 +96,7 @@
               <div class="row">
                   <div class="col">
                       <div class="container">
-                          <a href="{{ route('create_deck') }}"> <h1 class="gugi pointer">ENTER</h1></a>
+                          <a href="{{ route('home') }}"> <h1 class="gugi pointer">ENTER</h1></a>
                          
                       </div>
                   </div>

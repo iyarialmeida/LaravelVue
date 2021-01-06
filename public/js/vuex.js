@@ -93,6 +93,7 @@ let deck_obj = new Vue({
     sideIndex:null,
     landIndex:null,
     expanded:false,
+    selectus:"",
     one_card:{
       name:'Card-Name',
       mana_cost:'{Mana-Cost}',
@@ -105,7 +106,7 @@ let deck_obj = new Vue({
   },
   methods:{
     getView:function( uri, index, section ){
-
+console.log(this.deckList);
       deck_obj.deckIndex = null;
       deck_obj.sideIndex = null;
       deck_obj.landIndex = null;

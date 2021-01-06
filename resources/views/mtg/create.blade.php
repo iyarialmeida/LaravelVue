@@ -25,7 +25,17 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-4">                  
+                <div class="col-3">   
+                  <div class="form-group">                    
+                    <select class="form-control form-control-sm">
+                      <option>Option MyOption</option>          
+                      <option v-repeat="card in deckList" v-bind:value="card.name">
+                        @{{ card.name }}
+                      </option>
+                    </select>
+                    <small class="form-text text-muted">Select Card as Portrait</small>
+                    <small class="form-text text-muted">@{{selectus}}</small>
+                  </div>               
                   <input type="hidden" value="" id="sendDeck" name="deck" required>
                   <input type="hidden" value="" id="sendSide" name="side">
                   <input type="hidden" value="" id="sendLands" name="lands" required>

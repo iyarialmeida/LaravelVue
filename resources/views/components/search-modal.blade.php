@@ -11,7 +11,7 @@
           <div class="row">
             <div class="col">             
               <div class="input-group mb-2">               
-                <input type="text" class="form-control form-control-sm" id="inlineFormInputGroup" placeholder="Card Name"  v-model="query3 | lowercase">
+                <input type="text" class="form-control form-control-sm" placeholder="Card Name"  v-model="query3 | lowercase" debounce="500">
               </div>
             </div>
             <div class="col" v-show="query3.length > 0 && query_result.length > 0">Do you Mean...            

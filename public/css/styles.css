@@ -1,5 +1,6 @@
 body{
     overflow-y: auto;
+    overflow-x: hidden;
 }
 .gugi{
     font-family: 'Gugi', cursive;
