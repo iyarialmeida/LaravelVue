@@ -48,6 +48,8 @@ class MTGController extends Controller
 
         $lands = json_decode( $request->lands );
 
+        $portrait = json_decode( $request->portrait );
+
         
 
         $deck_name = str_replace( ' ', '-', $request->name );
@@ -66,7 +68,8 @@ class MTGController extends Controller
                 'user_id' => Auth::id(),
                 'author' => Auth::user()->name,
                 'public' => $public,
-                'comments' => $comments,                    
+                'comments' => $comments,
+                'img_url' => $portrait                  
             ]                
         );
        
@@ -86,6 +89,7 @@ class MTGController extends Controller
         $this->fillDeck( $deck_name, $side, 'side' );
 
         $this->fillDeck( $deck_name, $lands, 'land' );
+
 
         if( $comments ){
 

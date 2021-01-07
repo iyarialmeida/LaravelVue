@@ -106,7 +106,7 @@ let deck_obj = new Vue({
   },
   methods:{
     getView:function( uri, index, section ){
-console.log(this.deckList);
+
       deck_obj.deckIndex = null;
       deck_obj.sideIndex = null;
       deck_obj.landIndex = null;
@@ -140,6 +140,9 @@ console.log(this.deckList);
     },
     expansorToggle:function(){
       deck_obj.expanded = !deck_obj.expanded;
+    },
+    changeSelectus:function(){
+      $('#sendPortrait').val(this.selectus);      
     }
   },
   

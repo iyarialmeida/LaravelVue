@@ -27,18 +27,18 @@
                 </div>
                 <div class="col-3">   
                   <div class="form-group">                    
-                    <select class="form-control form-control-sm">
+                    <select class="form-control form-control-sm" v-model="selectus" v-on="change:changeSelectus()">
                       <option>Option MyOption</option>          
-                      <option v-repeat="card in deckList" v-bind:value="card.name">
+                      <option v-repeat="card in deckList" v-bind:value="card.uri">
                         @{{ card.name }}
                       </option>
                     </select>
-                    <small class="form-text text-muted">Select Card as Portrait</small>
-                    <small class="form-text text-muted">@{{selectus}}</small>
+                    <small class="form-text text-muted">Select Card as Portrait</small>                    
                   </div>               
-                  <input type="hidden" value="" id="sendDeck" name="deck" required>
+                  <input type="hidden" value="" id="sendDeck" name="deck">
                   <input type="hidden" value="" id="sendSide" name="side">
-                  <input type="hidden" value="" id="sendLands" name="lands" required>
+                  <input type="hidden" value="" id="sendLands" name="lands">
+                  <input type="hidden" value="" id="sendPortrait" name="portrait">
                   <input type="submit" value="Create this Deck" class="btn btn-dark" v-show="deckList.length != 0">                                    
                 </div>
                
