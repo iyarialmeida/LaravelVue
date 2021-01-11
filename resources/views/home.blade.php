@@ -11,38 +11,19 @@
     <div class="col"><br>
       <h3 class="gugi">Rated Over 100!</h3>
       <ul class="list-group list-group-horizontal">
+        @foreach ( $over_100 as $deck )
         <li class="list-group-item">
           <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <img src="{{ $deck->img_url }}" class="card-img-top" height="75%" width="75%">
             <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p>Rate:110</p>
-              <p class="kufam">Description</p>
+              <h5 class="kufam">{{ $deck->name }}</h5>
+              <small class="gugi">{{ $deck->author }}</small>
+              <p>Rate:{{ $deck->rate }}</p>
+              <a href="#" class="modal-title kufam">Check this Deck</a>             
             </div>
           </div>
         </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p>Rate:110</p>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>  <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p>Rate:110</p>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
+        @endforeach
       </ul>
     </div>
   </div>
@@ -51,96 +32,19 @@
     <div class="col"><br>
       <h3 class="gugi">Rated 70-100</h3>
       <ul class="list-group list-group-horizontal">
+        @foreach ( $r70_100 as $deck )
         <li class="list-group-item">
           <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <img src="{{ $deck->img_url }}" class="card-img-top" height="75%" width="75%">
             <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
+              <h5 class="kufam">{{ $deck->name }}</h5>
+              <small class="gugi">{{ $deck->author }}</small>
+              <p>Rate:{{ $deck->rate }}</p>
+              <a href="#" class="modal-title kufam">Check this Deck</a>             
             </div>
           </div>
         </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>  
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
+        @endforeach
       </ul>
     </div>
   </div>
@@ -149,96 +53,19 @@
     <div class="col"><br>
       <h3 class="gugi">Rated 40-69</h3>
       <ul class="list-group list-group-horizontal">
+        @foreach ( $r30_69 as $deck )
         <li class="list-group-item">
           <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <img src="{{ $deck->img_url }}" class="card-img-top" height="75%" width="75%">
             <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
+              <h5 class="kufam">{{ $deck->name }}</h5>
+              <small class="gugi">{{ $deck->author }}</small>
+              <p>Rate:{{ $deck->rate }}</p>
+              <a href="#" class="modal-title kufam">Check this Deck</a>             
             </div>
           </div>
         </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>  
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
+        @endforeach
       </ul>
     </div>
   </div>
@@ -247,96 +74,19 @@
     <div class="col"><br>
       <h3 class="gugi">Rated 39 or Less</h3>
       <ul class="list-group list-group-horizontal">
+        @foreach ( $r0_29 as $deck )
         <li class="list-group-item">
           <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
+            <img src="{{ $deck->img_url }}" class="card-img-top" height="75%" width="75%">
             <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
+              <h5 class="kufam">{{ $deck->name }}</h5>
+              <small class="gugi">{{ $deck->author }}</small>
+              <p>Rate:{{ $deck->rate }}</p>
+              <a href="#" class="modal-title kufam">Check this Deck</a>             
             </div>
           </div>
         </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>  
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
-        <li class="list-group-item">
-          <div class="card" style="width: 18rem;">
-            <img src="{{ asset('img/mtg/card.jpg') }}" class="card-img-top" height="75%" width="75%">
-            <div class="card-body">
-              <h5 class="kufam">Deck Name</h5>
-              <small class="gugi">Author Name</small>
-              <p class="kufam">Description</p>
-            </div>
-          </div>
-        </li>
+        @endforeach
       </ul>
     </div>
   </div>

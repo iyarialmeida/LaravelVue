@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    
+       
     public function __construct()
     {
         $this->middleware('auth');
+
     }
     /**
      * Display a listing of the resource.
@@ -18,7 +20,28 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view( 'home' );
+        $over_100 = DB::table('all_decks')->where( 'public', true )
+                                          ->where( 'rate', '>', 100 ) 
+                                          ->get();
+
+        $rate70_100 = DB::table('all_decks')->where( 'public', true )
+                                            ->whereBetween( 'rate', [70, 100])
+                                            ->get();
+        
+        $rate30_69 = DB::table('all_decks')->where( 'public', true )
+                                            ->whereBetween( 'rate', [30, 69])
+                                            ->get();
+
+        $rate0_29 = DB::table('all_decks')->where( 'public', true )
+                                           ->whereBetween( 'rate', [0, 29])
+                                           ->get();
+        
+        return view( 'home', [
+            'over_100' => $over_100,
+            'r70_100' => $rate70_100,
+            'r30_69' => $rate30_69,
+            'r0_29' => $rate0_29
+        ] );
     }
 
     /**

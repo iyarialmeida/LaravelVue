@@ -28,7 +28,7 @@
                 <div class="col-3">   
                   <div class="form-group">                    
                     <select class="form-control form-control-sm" v-model="selectus" v-on="change:changeSelectus()">
-                      <option>Option MyOption</option>          
+                      <option>Select a Portrait</option>          
                       <option v-repeat="card in deckList" v-bind:value="card.uri">
                         @{{ card.name }}
                       </option>

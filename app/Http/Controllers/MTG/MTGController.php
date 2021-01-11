@@ -27,10 +27,7 @@ class MTGController extends Controller
 
         $this->table = new AllDecks();
 
-        $this->client = new Client( [
-            'base_uri' => 'https://api.scryfall.com'
-            ]
-        );
+        $this->client = new Client();
 
     }
 
@@ -48,10 +45,15 @@ class MTGController extends Controller
 
         $lands = json_decode( $request->lands );
 
-        $portrait = json_decode( $request->portrait );
+        foreach( $deck as $index => $card ):
 
+            if( $card->name == $request->portrait ){
+
+               $obj_card = json_decode($this->client->get( $card->uri )->getBody());
+            }
+
+        endforeach;
         
-
         $deck_name = str_replace( ' ', '-', $request->name );
 
         $public = empty( $request->public ) ? false : true;
@@ -69,7 +71,7 @@ class MTGController extends Controller
                 'author' => Auth::user()->name,
                 'public' => $public,
                 'comments' => $comments,
-                'img_url' => $portrait                  
+                'img_url' => $obj_card->image_uris->png                 
             ]                
         );
        
@@ -80,7 +82,8 @@ class MTGController extends Controller
             $table->id();                                                  
             $table->string( 'card_name' ); 
             $table->enum( 'card_type', [ 'land', 'deck', 'side' ] );  
-            $table->string( 'card_url' );            
+            $table->string( 'card_url' );    
+            $table->smallInteger( 'qty' );        
             
         });
 
@@ -104,11 +107,7 @@ class MTGController extends Controller
 
         }    
 
-        return view( 'mtg.save', [ 
-            'deck' => $deck,
-            'side' => $side,
-            'lands' => $lands
-        ] );
+        return redirect()->route('deck_manager');
 
                
     }
@@ -123,6 +122,8 @@ class MTGController extends Controller
 
         $deck = DB::table( $name )->get();
 
+        $testeable_deck = array();
+
         foreach( $deck as $index => $card ): 
 
             $response = $this->client->get( $card->card_url );
@@ -132,10 +133,15 @@ class MTGController extends Controller
             $card->img_uri = $result->image_uris->normal;
 
             $card->text = $result->oracle_text;
+          
+            for( $i=0; $i < intval( $card->qty ); $i++ ){
+
+                array_push( $testeable_deck, $card );
+            }
            
         endforeach;
         
-        return view( 'mtg.testtable', [ 'deck' => $deck ] );
+        return view( 'mtg.testtable', [ 'deck' => $testeable_deck ] );
         
     }
 
@@ -148,14 +154,15 @@ class MTGController extends Controller
 
     protected function fillDeck( String $deck_name, $deck, String $type ){
 
-        foreach( $deck as $card ):
+        foreach( (array )$deck as $index => $card ):
            
             DB::table( $deck_name )->insertGetId(
                 [
                     
                     'card_name' =>  $card->name,
                     'card_type' => $type,
-                    'card_url' => $card->uri
+                    'card_url' => $card->uri,
+                    'qty' => intval($card->quantity)
                 ]                
             );
 
