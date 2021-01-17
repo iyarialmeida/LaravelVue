@@ -110,7 +110,7 @@
                   v-repeat="set in sets_list | filterBy setQuery in 'name'"
                   v-on="click: getSet( set.search_uri, set.name )">
                   <div class="d-inline p-3"> @{{ set.name }}</div>
-                  <div class="d-inline p-3"><img src="@{{ set.icon_svg_uri }}" height="30em" width="30em"></div>               
+                  <div class="d-inline p-3 float-right"><img src="@{{ set.icon_svg_uri }}" height="30em" width="30em"></div>               
                 </a>                
               </div>
             </div>
@@ -159,8 +159,7 @@
                     v-attr="min:1, max: one_card.type_line.includes( 'Basic Land' ) ? 20 : 4" 
                     v-model="quantity">
                   </div>
-                </div>
-                
+                </div>                
               </div>
             </div>
         </div>

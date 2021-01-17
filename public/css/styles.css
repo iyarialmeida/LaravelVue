@@ -28,6 +28,10 @@ body{
     overflow-y: scroll;
     max-height: 38em;
 }
+.scroller-oracle{
+    overflow-y: scroll;
+    max-height: 19em;
+}
 .card-hover{
     padding: 0.5em;
     cursor: pointer;

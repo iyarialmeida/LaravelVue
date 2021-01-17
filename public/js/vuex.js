@@ -159,7 +159,10 @@ let search = new Vue({
       selected_color:'',
       selected_card_type:'',
       selected_catalog:'',
-      catalog:[]
+      catalog:[],
+      selected_oracle_type:'',
+      oracle_catalog:[],
+      oracle_selected:[]
   },
   methods:{         
       searchByString:function(title){
@@ -175,9 +178,25 @@ let search = new Vue({
         }];
         setOneCard()
         searchByParams();
+      },
+      addOracle:function( oracle ){
+        function checkOracle(text) {
+          return text == oracle ;
+        }
+        this.oracle_selected.find(checkOracle);
+        if(this.oracle_selected.find(checkOracle)){
+          alert( "word:"+oracle+"is already in list.");
+         
+        }else{this.oracle_selected.push( oracle );}
+        
+      },
+      removeOracle:function( index ){
+        this.oracle_selected.splice( index, 1 );
       }
   }
 });
+
+
 
 search.$watch('query3', function (val) {
   search.selected='';
@@ -188,6 +207,10 @@ search.$watch('selected_card_type', function (val) {
   search.selected_catalog='';
   getCatalog(val);
   })
+
+  search.$watch('selected_oracle_type', function(val){    
+    getOracleCatalog(val);
+    })
 
 //--------------------------------------------------
 /*-******************************************************************/
@@ -372,12 +395,23 @@ function autoComplete(text,url){
 }
 //------------------------------------------------------------------------------------
 function searchByParams(){ 
+  setOneCard();
   /*console.log(search.selected_card_type);
    
    */
     let type = search.selected_card_type ? 't:'+search.selected_card_type :'';
     let catalog = search.selected_catalog ? 't:'+search.selected_catalog :'';
     let color = search.selected_color ? 'c:'+search.selected_color :'';
+    let all_oracles = '';
+
+    if( search.oracle_selected.length > 0 ){
+
+        search.oracle_selected.forEach( oracle => {
+          
+          all_oracles+='+' + encodeURIComponent( 'o:' + oracle) ;
+      });
+
+    }
 
     let uriComp = '';
 
@@ -387,12 +421,25 @@ function searchByParams(){
         uriComp+='+'+encodeURIComponent(catalog);
         if(color){
           uriComp+='+'+encodeURIComponent(color);
+          if(all_oracles){
+            uriComp+=all_oracles;
+          }
         }
       }
       if(color){
         uriComp+='+'+encodeURIComponent(color);
+        if(all_oracles){
+          uriComp+=all_oracles;
+        }
       }
-    }   
+
+      if(all_oracles){
+        uriComp+=all_oracles;
+      }
+    }  
+    if(all_oracles){
+      uriComp+=all_oracles;
+    } 
     
     axios.get(base_uri +'/cards/search?q='+uriComp)
   .then(function (response) {
@@ -400,25 +447,26 @@ function searchByParams(){
     if(response.data.total_cards>1){
       
       vm.cards_list = response.data.data;
-      setOneCard()
+      
     }
     if(response.data.total_cards==1){     
-     
+      defaultOneCard();
       vm.one_card = response.data.data[0];
       vm.cards_list = [];
     }
 
     if( response.data.has_more ){
       console.log(response.data.next_page );
+      defaultOneCard();
       pager.vshow = true;
-      pager.next = response.data.next_page;
-      console.log(pager.next );
+      pager.next = response.data.next_page;     
       pager.prev = base_uri +'/cards/search?q='+uriComp;
-
+      
     }
     
       
-  }).catch(function (error) {
+  }).catch( function( error ){
+    //console.log( error );
     alert('No results were obtained, try another combination');
   });
  }
@@ -446,5 +494,30 @@ function setOneCard(){
     
   };
 }
+
+function defaultOneCard(){
+  vm.one_card={
+    name:'Card-Name',
+    mana_cost:'{Mana-Cost}',
+    type_line:'Card-Type',
+    oracle_text:'Oracel-Text',
+    image_uris:
+     { 
+       normal:'img/mtg/card.jpg'
+      }
+    
+  };
+}
+//-------------------------------------------------------------------------------------
+  function getOracleCatalog(val){
+
+    axios.get( 'https://api.scryfall.com/catalog/'  +val )
+         .then( function( answer ){
+            
+          search.oracle_catalog = answer.data.data;    
+
+       })
+    
+  }
 //-------------------------------------------------------------------------------------
 });
