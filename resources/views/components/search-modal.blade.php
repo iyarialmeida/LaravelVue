@@ -22,6 +22,7 @@
             </div>
           </div><br>
           <div class="row">
+            <div class="container"><h6 class="kufam modal-title">Card Types:</h6></div>
             <div class="col-4">
               <div class="input-group mb-2">               
                 <select class="form-control form-control-sm" v-model="selected_card_type">
@@ -44,15 +45,15 @@
             </div>
             <div class="col" v-show="selected_card_type != 'artifact' && selected_card_type != 'land' && selected_card_type != ''">
               <div class="input-group mb-2">               
-                <select class="form-control form-control-sm" v-model="selected_color">
-                  <option value="">Select a Color</option>
-                  <option value="black">Black</option>
-                  <option value="blue">Blue</option>
-                  <option value="green">Green</option>
-                  <option value="red">Red</option>
-                  <option value="white">White</option>
-                </select>
-              </div>
+                <select class="form-control form-control-sm" v-model="selected_color" multiple>
+                  <option disabled>Select a Color</option>
+                  <option value="b">Black</option>
+                  <option value="u">Blue</option>
+                  <option value="g">Green</option>
+                  <option value="r">Red</option>
+                  <option value="w">White</option>                
+                </select>                
+              </div><small class="form-text text-muted">Multiple Select (Ctrl + Click)</small>
             </div>            
           </div><hr>
           <div class="row">
@@ -85,11 +86,57 @@
                 v-repeat="oracle in oracle_selected">
                  @{{ oracle }}
                 <span class="badge badge-pill badge-danger pointer float-right"
-                      v-on="click:removeOracle($index)">
-                     
+                      v-on="click:removeOracle($index)">                     
                   Remove
                 </span>
               </li> 
+              </ul>
+            </div>
+          </div><br>
+          <div class="row">
+            <div class="container"><h6 class="kufam modal-title">Rarity:</h6></div>
+            <div class="col-4">
+              <div class="input-group mb-2">               
+                <select class="form-control form-control-sm" v-model="selected_rarity">
+                  <option value="">Select Rarity</option>
+                  <option value="common">Common</option>
+                  <option value="uncommon">Uncommon</option>
+                  <option value="rare">Rare</option>  
+                  <option value="mythic">Mythic</option>               
+                </select>
+              </div>
+            </div>
+            <div class="col-4">
+              <ul class="list-group shadow scroller-oracle">
+                <li class="list-group-item">
+                  <img src="/img/icon/1.svg.png" height="8%" width="8%">
+                  <span class="badge badge-pill badge-primary pointer float-right" 
+                        v-on="click:addMana(1)">
+                         Add
+                  </span>
+                </li>
+                <li class="list-group-item">
+                  <img src="/img/icon/x.svg.png" height="8%" width="8%">
+                  <span class="badge badge-pill badge-primary pointer float-right" 
+                        v-on="click:addMana('x')">
+                         Add
+                  </span>
+                </li>
+                <li class="list-group-item"  v-repeat="icon in selected_color">
+                  <img src="/img/icon/@{{icon}}.svg.png" height="9%" width="9%">
+                  <span class="badge badge-pill badge-primary pointer float-right" 
+                         v-on="click:addMana(icon)">
+                         Add
+                  </span>
+                </li>
+                              
+              </ul>
+            </div>
+            <div class="col-4">
+              <ul class="list-inline">
+                <li class="list-inline-item" v-repeat="mana in mana_cost">
+                  @{{mana}}
+                </li>               
               </ul>
             </div>
           </div>

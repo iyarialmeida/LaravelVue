@@ -24,6 +24,7 @@ $( document ).ready( function(){
             },
             quantity:0,
             maxCards:4,
+            
            
           },
         methods:{
@@ -58,11 +59,9 @@ $( document ).ready( function(){
             },
           addToLands:function( name, uri ){
               
-            addToOneList( name, uri, deck_obj.landList, 'Lands' );
-
+            addToOneList( name, uri, deck_obj.landList, 'Lands' );          
            
-           
-            },
+            }
           
           },
         computed:{
@@ -156,13 +155,16 @@ let search = new Vue({
       query_result:[],
       selected:'',
       result_card:{},
-      selected_color:'',
+      selected_color:[],
       selected_card_type:'',
       selected_catalog:'',
       catalog:[],
       selected_oracle_type:'',
       oracle_catalog:[],
-      oracle_selected:[]
+      oracle_selected:[],
+      selected_rarity:'',
+      mana_cost:[],
+      unity_cost:0
   },
   methods:{         
       searchByString:function(title){
@@ -192,6 +194,46 @@ let search = new Vue({
       },
       removeOracle:function( index ){
         this.oracle_selected.splice( index, 1 );
+      },
+      addMana:function(cost){
+console.log(cost);
+        let found = this.mana_cost.find( element => element == cost );
+        let fx = this.mana_cost.find( element => element == 'x' );
+
+        if(found == 'x' ){
+          alert('X already added as mana cost.');
+        }
+
+        if(found == 0 ){
+          alert('0 already added as mana cost.');
+        }
+
+        if( cost == 1 ){this.mana_cost.push();
+         /* if( found >= 1 ){
+            this.unity_cost++;
+            this.mana_cost.push(this.unity_cost);
+          }else{
+
+          }*/
+          
+        }
+
+        if(cost == 1 && fx ){
+
+         let index = this.mana_cost.findIndex( element => element == 'x' );
+          this.mana_cost.splice(index,1);
+          this.mana_cost.push(this.cost);
+        }
+
+        if(cost == 'x' && found == 1 ){
+
+          let index = this.mana_cost.findIndex( element => element == 1 );
+           this.mana_cost.splice(index,1);
+           this.mana_cost.push(this.cost);
+         }
+         this.mana_cost.push(cost);
+         console.log(this.mana_cost);
+        
       }
   }
 });
@@ -209,25 +251,15 @@ search.$watch('selected_card_type', function (val) {
   })
 
   search.$watch('selected_oracle_type', function(val){    
-    getOracleCatalog(val);
+    if(val){getOracleCatalog(val);}else{
+      search.oracle_catalog = [];
+      search.oracle_selected = [];
+    }
+    
     })
 
 //--------------------------------------------------
-/*-******************************************************************/
 
-
-let pager = new Vue({
-  el:"#pager",
-  data:{
-    pages:[],
-    next:'',
-    prev:'',
-    vshow:false
-  }
-});
-
-
-/*************************************************************************************** */
 /********************************* */
 
 function getSets(){
@@ -277,17 +309,7 @@ function getOneSet( uri ){
 
 function getOneCard( uri, theView ){
 
-  theView.one_card = {
-    name:'Loading...',
-    mana_cost:'Loading...',
-    type_line:'Loading...',
-    oracle_text:'Loading...',
-    image_uris:
-     { 
-       normal:'img/icon/loading.gif'
-      }
-    
-  };
+  setOneCard();
   
   axios.get( uri ).then(function (response) {
         
@@ -396,13 +418,27 @@ function autoComplete(text,url){
 //------------------------------------------------------------------------------------
 function searchByParams(){ 
   setOneCard();
-  /*console.log(search.selected_card_type);
-   
-   */
-    let type = search.selected_card_type ? 't:'+search.selected_card_type :'';
-    let catalog = search.selected_catalog ? 't:'+search.selected_catalog :'';
-    let color = search.selected_color ? 'c:'+search.selected_color :'';
+  
+  //console.log(search.selected_color.length);
+    let type = search.selected_card_type ? 't:' + search.selected_card_type : '';
+    let catalog = search.selected_catalog ? 't:' + search.selected_catalog : '';
+    let allColors = '';
+
+    if( search.selected_color.length > 0 ){
+      
+      let allCol = 'c:';
+
+      search.selected_color.forEach( color => {
+        
+         allCol += color;
+
+      });
+
+      allColors += '+' + encodeURIComponent (allCol );
+    }
+    
     let all_oracles = '';
+    
 
     if( search.oracle_selected.length > 0 ){
 
@@ -413,33 +449,26 @@ function searchByParams(){
 
     }
 
+    let rarity = search.selected_rarity ? 'r:' +search.selected_rarity: '';
+
     let uriComp = '';
 
     if(type){
-      uriComp+=encodeURIComponent(type);
-      if(catalog){
-        uriComp+='+'+encodeURIComponent(catalog);
-        if(color){
-          uriComp+='+'+encodeURIComponent(color);
-          if(all_oracles){
-            uriComp+=all_oracles;
-          }
-        }
-      }
-      if(color){
-        uriComp+='+'+encodeURIComponent(color);
-        if(all_oracles){
-          uriComp+=all_oracles;
-        }
-      }
-
-      if(all_oracles){
-        uriComp+=all_oracles;
-      }
-    }  
+      uriComp+= encodeURIComponent(type);
+    }
+    if(catalog){
+      uriComp+='+'+ encodeURIComponent(catalog);
+    }
+    if(allColors){
+      uriComp+=allColors;
+    }
     if(all_oracles){
-      uriComp+=all_oracles;
+      uriComp+=all_oracles;     
+    }
+    if(rarity){
+      uriComp+='+'+ encodeURIComponent(rarity);
     } 
+    
     
     axios.get(base_uri +'/cards/search?q='+uriComp)
   .then(function (response) {
@@ -447,20 +476,21 @@ function searchByParams(){
     if(response.data.total_cards>1){
       
       vm.cards_list = response.data.data;
-      
+      defaultOneCard();
     }
     if(response.data.total_cards==1){     
-      defaultOneCard();
+      
       vm.one_card = response.data.data[0];
       vm.cards_list = [];
     }
 
-    if( response.data.has_more ){
-      console.log(response.data.next_page );
-      defaultOneCard();
-      pager.vshow = true;
-      pager.next = response.data.next_page;     
-      pager.prev = base_uri +'/cards/search?q='+uriComp;
+    if( response.data.has_more ){      
+      
+           
+      axios.get(response.data.next_page)
+      .then(function (result) {  
+        vm.cards_list.push(result.data.data);      
+      });
       
     }
     
@@ -468,6 +498,8 @@ function searchByParams(){
   }).catch( function( error ){
     //console.log( error );
     alert('No results were obtained, try another combination');
+    defaultOneCard();
+    vm.cards_list = [];
   });
  }
 //------------------------------------------
@@ -475,7 +507,7 @@ function getCatalog(catalog){
   if(!catalog){search.catalog=[];return;}
   axios.get(base_uri +'/catalog/'+catalog+'-types')
   .then(function (response) {  
-    search.catalog=response.data.data;      
+    search.catalog=response.data.data.sort();      
   });
  
 }
@@ -496,7 +528,7 @@ function setOneCard(){
 }
 
 function defaultOneCard(){
-  vm.one_card={
+  vm.one_card = {
     name:'Card-Name',
     mana_cost:'{Mana-Cost}',
     type_line:'Card-Type',
@@ -511,13 +543,12 @@ function defaultOneCard(){
 //-------------------------------------------------------------------------------------
   function getOracleCatalog(val){
 
-    axios.get( 'https://api.scryfall.com/catalog/'  +val )
-         .then( function( answer ){
-            
-          search.oracle_catalog = answer.data.data;    
-
+    axios.get( 'https://api.scryfall.com/catalog/' + val )
+         .then( function( answer ){           
+            search.oracle_catalog = answer.data.data.sort();             
        })
     
   }
-//-------------------------------------------------------------------------------------
+
+//---------------------------------
 });
