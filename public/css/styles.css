@@ -1,6 +1,7 @@
 body{
     overflow-y: auto;
     overflow-x: hidden;
+    font-size: 110%;
 }
 .gugi{
     font-family: 'Gugi', cursive;
@@ -26,7 +27,7 @@ body{
 }
 .scroller{
     overflow-y: scroll;
-    max-height: 38em;
+    max-height: 46em;
 }
 .scroller-oracle{
     overflow-y: scroll;

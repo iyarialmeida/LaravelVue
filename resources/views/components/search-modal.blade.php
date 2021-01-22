@@ -11,7 +11,7 @@
           <div class="row">
             <div class="col-4">             
               <div class="input-group mb-2">               
-                <input type="text" class="form-control form-control-sm" placeholder="Card Name"  v-model="query3 | lowercase" debounce="500">
+                <input type="text" class="form-control" placeholder="Card Name"  v-model="query3 | lowercase" debounce="500">
               </div>
             </div>
             <div class="col" v-show="query3.length > 0 && query_result.length > 0">Do you Mean...            
@@ -25,7 +25,7 @@
             <div class="container"><h6 class="kufam modal-title">Card Types:</h6></div>
             <div class="col-4">
               <div class="input-group mb-2">               
-                <select class="form-control form-control-sm" v-model="selected_card_type">
+                <select class="form-control" v-model="selected_card_type">
                   <option value="">Select a Card Type</option>
                   <option value="artifact">Artifact</option>
                   <option value="creature">Creature</option>
@@ -38,14 +38,14 @@
             </div>
             <div class="col" v-show="catalog.length > 0">
               <div class="input-group mb-2">               
-                <select class="form-control form-control-sm" v-model="selected_catalog" options="catalog">
+                <select class="form-control" v-model="selected_catalog" options="catalog">
                   <option value="">Select from Catalog</option>                    
                 </select>
               </div>
             </div>
             <div class="col" v-show="selected_card_type != 'artifact' && selected_card_type != 'land' && selected_card_type != ''">
               <div class="input-group mb-2">               
-                <select class="form-control form-control-sm" v-model="selected_color" multiple>
+                <select class="form-control" v-model="selected_color" multiple>
                   <option disabled>Select a Color</option>
                   <option value="b">Black</option>
                   <option value="u">Blue</option>
@@ -60,7 +60,7 @@
             <div class="container"><h6 class="kufam modal-title">Oracle Contains:</h6></div>           
             <div class="col">
               <div class="input-group mb-2">               
-                <select class="form-control form-control-sm" v-model="selected_oracle_type">
+                <select class="form-control" v-model="selected_oracle_type">
                   <option value="">Select Oracle Catalog</option>
                   <option value="keyword-abilities">Abilities</option>
                   <option value="keyword-actions">Actions</option>
@@ -97,7 +97,7 @@
             <div class="container"><h6 class="kufam modal-title">Rarity:</h6></div>
             <div class="col-4">
               <div class="input-group mb-2">               
-                <select class="form-control form-control-sm" v-model="selected_rarity">
+                <select class="form-control" v-model="selected_rarity">
                   <option value="">Select Rarity</option>
                   <option value="common">Common</option>
                   <option value="uncommon">Uncommon</option>
@@ -106,22 +106,22 @@
                 </select>
               </div>
             </div>
-            <div class="col-4">
+            <div class="col-4"><div class="container"><h6 class="kufam modal-title">Mana Cost:</h6></div>
               <ul class="list-group shadow scroller-oracle">
-                <li class="list-group-item">
-                  <img src="/img/icon/1.svg.png" height="8%" width="8%">
-                  <span class="badge badge-pill badge-primary pointer float-right" 
-                        v-on="click:addMana(1)">
-                         Add
-                  </span>
+
+                <li class="list-group-item">                  
+                  <div class="input-group mb-2">               
+                    <select class="form-control form-control-sm" v-model="selected_mana">
+                      <option value="">Select Colorless Mana</option>
+                      <option value="x">X</option>
+                      @for ($i = 0; $i <= 20; $i++)
+                      <option value="{{$i}}">{{ $i }}</option>
+                      @endfor                   
+                    </select>
+                  </div>
+                 
                 </li>
-                <li class="list-group-item">
-                  <img src="/img/icon/x.svg.png" height="8%" width="8%">
-                  <span class="badge badge-pill badge-primary pointer float-right" 
-                        v-on="click:addMana('x')">
-                         Add
-                  </span>
-                </li>
+              
                 <li class="list-group-item"  v-repeat="icon in selected_color">
                   <img src="/img/icon/@{{icon}}.svg.png" height="9%" width="9%">
                   <span class="badge badge-pill badge-primary pointer float-right" 
@@ -133,11 +133,18 @@
               </ul>
             </div>
             <div class="col-4">
-              <ul class="list-inline">
-                <li class="list-inline-item" v-repeat="mana in mana_cost">
-                  @{{mana}}
-                </li>               
-              </ul>
+              <div class="container shadow">
+                <ul class="list-inline">
+                  <li class="list-inline-item">
+                    <img src="/img/icon/@{{selected_mana}}.svg.png" height="8%" width="8%">                 
+                  </li>  
+                  <li class="list-inline-item" v-repeat="mana in mana_cost">
+                    <img src="/img/icon/@{{mana}}.svg.png" height="9%" width="9%">
+                    
+                  </li>               
+                </ul>
+              </div>
+             
             </div>
           </div>
          

@@ -164,7 +164,7 @@ let search = new Vue({
       oracle_selected:[],
       selected_rarity:'',
       mana_cost:[],
-      unity_cost:0
+      selected_mana:''
   },
   methods:{         
       searchByString:function(title){
@@ -196,43 +196,8 @@ let search = new Vue({
         this.oracle_selected.splice( index, 1 );
       },
       addMana:function(cost){
-console.log(cost);
-        let found = this.mana_cost.find( element => element == cost );
-        let fx = this.mana_cost.find( element => element == 'x' );
-
-        if(found == 'x' ){
-          alert('X already added as mana cost.');
-        }
-
-        if(found == 0 ){
-          alert('0 already added as mana cost.');
-        }
-
-        if( cost == 1 ){this.mana_cost.push();
-         /* if( found >= 1 ){
-            this.unity_cost++;
-            this.mana_cost.push(this.unity_cost);
-          }else{
-
-          }*/
-          
-        }
-
-        if(cost == 1 && fx ){
-
-         let index = this.mana_cost.findIndex( element => element == 'x' );
-          this.mana_cost.splice(index,1);
-          this.mana_cost.push(this.cost);
-        }
-
-        if(cost == 'x' && found == 1 ){
-
-          let index = this.mana_cost.findIndex( element => element == 1 );
-           this.mana_cost.splice(index,1);
-           this.mana_cost.push(this.cost);
-         }
-         this.mana_cost.push(cost);
-         console.log(this.mana_cost);
+        if(this.mana_cost.length < 7){this.mana_cost.push(cost);}     
+      
         
       }
   }
