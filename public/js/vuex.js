@@ -196,8 +196,22 @@ let search = new Vue({
         this.oracle_selected.splice( index, 1 );
       },
       addMana:function(cost){
-        if(this.mana_cost.length < 7){this.mana_cost.push(cost);}     
-      
+        if(this.mana_cost.length < 7){this.mana_cost.push(cost);} 
+              
+      },
+      removeSelectedMana:function( index ){
+        this.selected_mana.splice( index, 1 );
+      },
+      removeManaCost: function( index ){
+        this.mana_cost.splice( index, 1 );
+      },
+      resetManaCost:function(){
+        
+        this.mana_cost = [];
+        this.selected_color = [];
+      },
+      resetSelectedColor:function(){
+        this.mana_cost = [];
         
       }
   }
@@ -383,8 +397,8 @@ function autoComplete(text,url){
 //------------------------------------------------------------------------------------
 function searchByParams(){ 
   setOneCard();
-  
-  //console.log(search.selected_color.length);
+  console.log(search.selected_mana);
+  console.log(search.mana_cost);
     let type = search.selected_card_type ? 't:' + search.selected_card_type : '';
     let catalog = search.selected_catalog ? 't:' + search.selected_catalog : '';
     let allColors = '';
@@ -415,14 +429,27 @@ function searchByParams(){
     }
 
     let rarity = search.selected_rarity ? 'r:' +search.selected_rarity: '';
+    let mana_cost_compo = '';
+
+    if( search.selected_mana ){
+
+      mana_cost_compo += search.selected_mana;
+
+    }
+
+    if( search.mana_cost.length > 0 ){
+
+      search.mana_cost.forEach( element => mana_cost_compo += element.toLowerCase() );
+
+    }
 
     let uriComp = '';
 
     if(type){
-      uriComp+= encodeURIComponent(type);
+      uriComp+= encodeURIComponent( type );
     }
     if(catalog){
-      uriComp+='+'+ encodeURIComponent(catalog);
+      uriComp+='+'+ encodeURIComponent( catalog );
     }
     if(allColors){
       uriComp+=allColors;
@@ -431,7 +458,11 @@ function searchByParams(){
       uriComp+=all_oracles;     
     }
     if(rarity){
-      uriComp+='+'+ encodeURIComponent(rarity);
+      uriComp+='+'+ encodeURIComponent( rarity );
+    } 
+
+    if(mana_cost_compo){
+      uriComp+='+'+ encodeURIComponent( 'c:' + mana_cost_compo );
     } 
     
     
@@ -461,7 +492,7 @@ function searchByParams(){
     
       
   }).catch( function( error ){
-    //console.log( error );
+   
     alert('No results were obtained, try another combination');
     defaultOneCard();
     vm.cards_list = [];

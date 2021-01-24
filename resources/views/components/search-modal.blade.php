@@ -25,7 +25,7 @@
             <div class="container"><h6 class="kufam modal-title">Card Types:</h6></div>
             <div class="col-4">
               <div class="input-group mb-2">               
-                <select class="form-control" v-model="selected_card_type">
+                <select class="form-control" v-model="selected_card_type" v-on="change:resetManaCost()">
                   <option value="">Select a Card Type</option>
                   <option value="artifact">Artifact</option>
                   <option value="creature">Creature</option>
@@ -45,7 +45,7 @@
             </div>
             <div class="col" v-show="selected_card_type != 'artifact' && selected_card_type != 'land' && selected_card_type != ''">
               <div class="input-group mb-2">               
-                <select class="form-control" v-model="selected_color" multiple>
+                <select class="form-control" v-model="selected_color" v-on="change:resetSelectedColor()" multiple>
                   <option disabled>Select a Color</option>
                   <option value="b">Black</option>
                   <option value="u">Blue</option>
@@ -83,12 +83,12 @@
             <div class="col">
               <ul class="list-group shadow scroller-oracle">
                 <li class="list-group-item"
-                v-repeat="oracle in oracle_selected">
-                 @{{ oracle }}
-                <span class="badge badge-pill badge-danger pointer float-right"
-                      v-on="click:removeOracle($index)">                     
-                  Remove
-                </span>
+                  v-repeat="oracle in oracle_selected">
+                  @{{ oracle }}
+                  <span class="badge badge-pill badge-danger pointer float-right"
+                        v-on="click:removeOracle($index)">                     
+                    Remove
+                  </span>
               </li> 
               </ul>
             </div>
@@ -108,7 +108,6 @@
             </div>
             <div class="col-4"><div class="container"><h6 class="kufam modal-title">Mana Cost:</h6></div>
               <ul class="list-group shadow scroller-oracle">
-
                 <li class="list-group-item">                  
                   <div class="input-group mb-2">               
                     <select class="form-control form-control-sm" v-model="selected_mana">
@@ -118,29 +117,31 @@
                       <option value="{{$i}}">{{ $i }}</option>
                       @endfor                   
                     </select>
-                  </div>
-                 
-                </li>
-              
-                <li class="list-group-item"  v-repeat="icon in selected_color">
+                  </div>                 
+                </li>              
+                <li class="list-group-item" v-repeat="icon in selected_color">
                   <img src="/img/icon/@{{icon}}.svg.png" height="9%" width="9%">
                   <span class="badge badge-pill badge-primary pointer float-right" 
                          v-on="click:addMana(icon)">
                          Add
                   </span>
-                </li>
-                              
+                </li>                              
               </ul>
             </div>
             <div class="col-4">
               <div class="container shadow">
-                <ul class="list-inline">
+                <ul class="list-inline" v-show="selected_mana != ''">
                   <li class="list-inline-item">
-                    <img src="/img/icon/@{{selected_mana}}.svg.png" height="8%" width="8%">                 
-                  </li>  
+                    <img src="/img/icon/@{{selected_mana}}.svg" height="8%" width="8%">                             
+                  </li>
+                </ul>
+                <ul class="list-inline" v-show="mana_cost.length > 0 ">  
                   <li class="list-inline-item" v-repeat="mana in mana_cost">
                     <img src="/img/icon/@{{mana}}.svg.png" height="9%" width="9%">
-                    
+                    <span class="badge badge-pill badge-danger pointer float-right"
+                          v-on="click:removeManaCost($index)">                     
+                      Remove
+                    </span>
                   </li>               
                 </ul>
               </div>
