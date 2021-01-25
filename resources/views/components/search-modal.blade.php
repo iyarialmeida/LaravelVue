@@ -30,9 +30,11 @@
                   <option value="artifact">Artifact</option>
                   <option value="creature">Creature</option>
                   <option value="enchantment">Enchantment</option>
+                  <option value="instant">Instant</option>
                   <option value="land">Land</option>
                   <option value="planeswalker">Planeswalker</option>
-                  <option value="spell">Spell</option>
+                  <option value="sorcery">Sorcery</option>
+                  
                 </select>
               </div>
             </div>
@@ -147,13 +149,18 @@
               </div>
              
             </div>
+          </div><br>
+          <div class="row">
+            <div class="col-6"><div class="container"><h6 class="kufam modal-title">Oracle Text:</h6></div>
+              <input class="form-control bg-white rounded" type="text" placeholder="Keywords in oracle" v-model="word">
+            </div>
           </div>
          
         </div>
         <div class="modal-footer">
          
           <button type="button" class="btn btn-dark" v-on="click:applySearch()" >Apply Search!</button>
-          <button type="button" class="btn btn-info" v-on="click:alert('reset')" >Reset</button>
+          <button type="button" class="btn btn-info" v-on="click:resetSearch()" >Reset</button>
           <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
         </div>
       </div>

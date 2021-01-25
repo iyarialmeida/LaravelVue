@@ -164,7 +164,8 @@ let search = new Vue({
       oracle_selected:[],
       selected_rarity:'',
       mana_cost:[],
-      selected_mana:''
+      selected_mana:'',
+      word:''
   },
   methods:{         
       searchByString:function(title){
@@ -213,6 +214,23 @@ let search = new Vue({
       resetSelectedColor:function(){
         this.mana_cost = [];
         
+      },
+      resetSearch:function(){
+        this.query3 = '';
+        this.query_result = [];
+        this.selected = '';
+        this.result_card = {};
+        this.selected_color = [];
+        this.selected_card_type = '';
+        this.selected_catalog = '';
+        this.catalog = [];
+        this.selected_oracle_type = '';
+        this.oracle_catalog = [];
+        this.oracle_selected = [];
+        this.selected_rarity = '';
+        this.mana_cost = [];
+        this.selected_mana = '';
+        this.word = '';
       }
   }
 });
@@ -226,15 +244,15 @@ autoComplete(val,'/cards/autocomplete');
 
 search.$watch('selected_card_type', function (val) {
   search.selected_catalog='';
-  getCatalog(val);
+  this.catalog = [];
+  if(val){getCatalog(val);}
+  
   })
 
-  search.$watch('selected_oracle_type', function(val){    
-    if(val){getOracleCatalog(val);}else{
-      search.oracle_catalog = [];
-      search.oracle_selected = [];
-    }
-    
+  search.$watch('selected_oracle_type', function(val){  
+    search.oracle_catalog = [];
+      search.oracle_selected = [];  
+    if(val){getOracleCatalog(val);}
     })
 
 //--------------------------------------------------
@@ -397,8 +415,8 @@ function autoComplete(text,url){
 //------------------------------------------------------------------------------------
 function searchByParams(){ 
   setOneCard();
-  console.log(search.selected_mana);
-  console.log(search.mana_cost);
+  
+  alert('vuex.js 419');
     let type = search.selected_card_type ? 't:' + search.selected_card_type : '';
     let catalog = search.selected_catalog ? 't:' + search.selected_catalog : '';
     let allColors = '';
@@ -432,24 +450,24 @@ function searchByParams(){
     let mana_cost_compo = '';
 
     if( search.selected_mana ){
-
+      
       mana_cost_compo += search.selected_mana;
 
     }
 
     if( search.mana_cost.length > 0 ){
 
-      search.mana_cost.forEach( element => mana_cost_compo += element.toLowerCase() );
+      search.mana_cost.forEach( element => mana_cost_compo += element );
 
     }
 
     let uriComp = '';
 
     if(type){
-      uriComp+= encodeURIComponent( type );
+      uriComp += '+'+ encodeURIComponent( type );
     }
     if(catalog){
-      uriComp+='+'+ encodeURIComponent( catalog );
+      uriComp +='+'+ encodeURIComponent( catalog );
     }
     if(allColors){
       uriComp+=allColors;
@@ -462,9 +480,12 @@ function searchByParams(){
     } 
 
     if(mana_cost_compo){
-      uriComp+='+'+ encodeURIComponent( 'c:' + mana_cost_compo );
+      uriComp+='+'+ encodeURIComponent( 'm:' + mana_cost_compo );
     } 
-    
+        
+    if( search.word ){
+      uriComp+='+' + encodeURIComponent( 'o:"' + search.word + '"');
+    }
     
     axios.get(base_uri +'/cards/search?q='+uriComp)
   .then(function (response) {
@@ -482,11 +503,7 @@ function searchByParams(){
 
     if( response.data.has_more ){      
       
-           
-      axios.get(response.data.next_page)
-      .then(function (result) {  
-        vm.cards_list.push(result.data.data);      
-      });
+      nextResults(response.data.next_page);      
       
     }
     
@@ -497,6 +514,12 @@ function searchByParams(){
     defaultOneCard();
     vm.cards_list = [];
   });
+ }
+ //------------------------------
+ function nextResults(url){
+
+  alert('make a apger pls' + url);
+
  }
 //------------------------------------------
 function getCatalog(catalog){
