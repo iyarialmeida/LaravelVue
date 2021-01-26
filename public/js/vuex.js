@@ -24,6 +24,7 @@ $( document ).ready( function(){
             },
             quantity:0,
             maxCards:4,
+            has_more:false
             
            
           },
@@ -61,6 +62,28 @@ $( document ).ready( function(){
               
             addToOneList( name, uri, deck_obj.landList, 'Lands' );          
            
+            },
+            getNext:function(){
+              
+              search.actual_index++;
+              if( search.actual_index <= search.archive.length -1){
+                nextResults(search.archive[search.actual_index]);
+              }else{
+                alert('There is no more Results.');
+              }
+             
+            },
+            getPrev:function(){
+
+              if(search.actual_index > 0){
+
+                  search.actual_index++;
+
+                  nextResults(search.archive[search.actual_index]);
+              }else{
+                alert('This is the start.');
+              }
+              
             }
           
           },
@@ -165,7 +188,9 @@ let search = new Vue({
       selected_rarity:'',
       mana_cost:[],
       selected_mana:'',
-      word:''
+      word:'',
+      archive:[],
+      actual_index:0
   },
   methods:{         
       searchByString:function(title){
@@ -414,9 +439,13 @@ function autoComplete(text,url){
 }
 //------------------------------------------------------------------------------------
 function searchByParams(){ 
+
   setOneCard();
   
-  alert('vuex.js 419');
+  search.archive = [];
+  search.actual_index = 0;
+  vm.has_more=false;
+
     let type = search.selected_card_type ? 't:' + search.selected_card_type : '';
     let catalog = search.selected_catalog ? 't:' + search.selected_catalog : '';
     let allColors = '';
@@ -501,10 +530,10 @@ function searchByParams(){
       vm.cards_list = [];
     }
 
-    if( response.data.has_more ){      
-      
-      nextResults(response.data.next_page);      
-      
+    if( response.data.has_more ){   
+      vm.has_more=true;
+      search.archive.push(base_uri +'/cards/search?q='+uriComp);
+      search.archive.push(response.data.next_page);       
     }
     
       
@@ -518,7 +547,34 @@ function searchByParams(){
  //------------------------------
  function nextResults(url){
 
-  alert('make a apger pls' + url);
+setOneCard();
+vm.cards_list =[{
+  name:'Loading',
+  image_uris:{
+    small:'img/icon/loading.gif'
+  },
+}];
+
+  axios.get(url)
+  .then(function (response) {
+    if(response.data.total_cards>1){
+      
+      vm.cards_list = response.data.data;
+      defaultOneCard();
+    }
+    if(response.data.total_cards==1){     
+      
+      vm.one_card = response.data.data[0];
+      vm.cards_list = [];
+    }
+    if( response.data.has_more ){  
+
+      vm.has_more=true;   
+      search.archive.push(response.data.next_page);       
+    }
+  });
+
+
 
  }
 //------------------------------------------

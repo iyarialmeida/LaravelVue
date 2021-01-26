@@ -117,7 +117,14 @@
         </div>
         <div class="col-lg-5">
           <div class="row">
-            <h4 class="d-inline p-2">Card List</h4> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a class="nav-link d-inline p-2" href="" data-toggle="modal" data-target="#search-modal">Advanced Search</a>                   
+            <h4 class="d-inline p-2">Card List</h4> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            <a class="nav-link d-inline p-2" href="" data-toggle="modal" data-target="#search-modal">Advanced Search</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;<nav aria-label="Page navigation example">
+              <ul class="pagination" v-show="has_more">
+                <li class="page-item"><a class="page-link" href="#" v-on="click:getPrev()">Previous</a></li>                
+                <li class="page-item"><a class="page-link" href="#" v-on="click:getNext()">Next</a></li>
+              </ul>
+            </nav>                   
             <div class="container-fluid">
               <input class="form-control  shadow p-3 mb-5 bg-white rounded" type="text" placeholder="Filter Card-List" v-model="cardQuery">
               <div class="list-group shadow p-3 mb-5 bg-white rounded scroller" role="tablist">              
