@@ -66,7 +66,7 @@ $( document ).ready( function(){
             getNext:function(){
               
               search.actual_index++;
-              if( search.actual_index <= search.archive.length -1){
+              if( search.actual_index <= (search.archive.length -1)){
                 nextResults(search.archive[search.actual_index]);
               }else{
                 alert('There is no more Results.');
@@ -77,7 +77,7 @@ $( document ).ready( function(){
 
               if(search.actual_index > 0){
 
-                  search.actual_index++;
+                  search.actual_index--;
 
                   nextResults(search.archive[search.actual_index]);
               }else{
@@ -518,7 +518,7 @@ function searchByParams(){
     
     axios.get(base_uri +'/cards/search?q='+uriComp)
   .then(function (response) {
-    
+    console.log(response.data);
     if(response.data.total_cards>1){
       
       vm.cards_list = response.data.data;
