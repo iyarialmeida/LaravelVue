@@ -518,7 +518,7 @@ function searchByParams(){
     
     axios.get(base_uri +'/cards/search?q='+uriComp)
   .then(function (response) {
-    console.log(response.data);
+    
     if(response.data.total_cards>1){
       
       vm.cards_list = response.data.data;

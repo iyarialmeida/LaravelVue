@@ -122,7 +122,7 @@
                   </div>                 
                 </li>              
                 <li class="list-group-item" v-repeat="icon in selected_color">
-                  <img src="/img/icon/@{{icon}}.svg.png" height="9%" width="9%">
+                  <img src="img/icon/@{{icon}}.svg.png" height="9%" width="9%">
                   <span class="badge badge-pill badge-primary pointer float-right" 
                          v-on="click:addMana(icon)">
                          Add
@@ -139,7 +139,7 @@
                 </ul>
                 <ul class="list-inline" v-show="mana_cost.length > 0 ">  
                   <li class="list-inline-item" v-repeat="mana in mana_cost">
-                    <img src="/img/icon/@{{mana}}.svg.png" height="9%" width="9%">
+                    <img src="img/icon/@{{mana}}.svg.png" height="9%" width="9%">
                     <span class="badge badge-pill badge-danger pointer float-right"
                           v-on="click:removeManaCost($index)">                     
                       Remove

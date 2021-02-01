@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MTG\MTGController;
+use App\Http\Controllers\MTG\Printer;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,3 +39,6 @@ Route::post( '/save_deck', [ MTGController::class, 'create' ] )->name( 'save_dec
 Route::get( '/deck_list', [ MTGController::class, 'deckList' ] )->name( 'deck_manager');
 
 Route::get( '/test_deck/{name}', [ MTGController::class, 'testTable' ] )->name( 'tester' );
+
+Route::get( '/print/{id}', [ Printer::class, 'print' ] )->name( 'print' );
+

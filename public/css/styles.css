@@ -1,7 +1,7 @@
 body{
     overflow-y: auto;
     overflow-x: hidden;
-    font-size: 110%;
+    
 }
 .gugi{
     font-family: 'Gugi', cursive;
@@ -27,7 +27,7 @@ body{
 }
 .scroller{
     overflow-y: scroll;
-    max-height: 46em;
+    max-height: 37em;
 }
 .scroller-oracle{
     overflow-y: scroll;
@@ -113,7 +113,7 @@ body{
 
 .link-light:hover{
     text-decoration: none;
-    color: white !important;
+    color: rgb(133, 133, 133) !important;
 }
 
 .min-hand{

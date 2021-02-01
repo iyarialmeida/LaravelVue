@@ -67,8 +67,7 @@
                 Account
               </button>
               <div class="dropdown-menu navbar-dark bg-dark" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Profile Settings</a>
-                <a class="dropdown-item" href="#">My Stuff</a>
+                <a class="dropdown-item" href="{{ url( '/user/profile' ) }}">Profile Settings</a>                 
                 <a class="dropdown-item" href="{{ route( 'logout') }}">Logout</a>
               </div>
             </div>

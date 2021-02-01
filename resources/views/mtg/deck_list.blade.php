@@ -11,10 +11,9 @@
         <div class="col-6 p7">
             <ul class="list-group list-group-flush">               
             @foreach ( $all_decks as $deck) 
-                <li class="list-group-item ml-3 shadow-lg">
+                <li class="list-group-item ml-3 shadow-lg border rounded">
                     {{ $deck->name }}
-                     &nbsp;&nbsp;&nbsp;
-                    <span class="badge badge-secondary badge-pill"> Rate: {{ $deck->rate }} </span>
+                    
                     &nbsp;&nbsp;&nbsp;
                     @if( $deck->comments)
                     <span class="badge badge-dark badge-pill pointer">See Comments</span>
@@ -24,7 +23,14 @@
                     &nbsp;&nbsp;&nbsp;
                     @if( $deck->public)
                     <small class="text-muted">Shown in Public</small>
+                    @else
+                    <small class="text-muted">Private</small>
                     @endif
+                    &nbsp;&nbsp;&nbsp;
+                   @if ( Auth::user()->acces == 'p' )
+                   <a href="{{ route( 'print', [ 'id' => $deck->id ] )}}" class="link-light">PRINT</a>
+                   @endif
+                    <span class="badge badge-secondary badge-pill float-right"> Rate: {{ $deck->rate }} </span>
                 </li><br>
             @endforeach
             </ul>           
